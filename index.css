@@ -1,0 +1,42 @@
+body {
+    height: 100%;
+    width: 100%;
+  
+  }
+  /* hover section */
+  .navbar .navbar-nav > li > a:hover,
+  .navbar .navbar-nav > li > a:focus,
+  .navbar .navbar-nav > .active > a:hover,
+  .navbar .navbar-nav > .active > a:focus {
+     background-color:#71797E;
+    border-radius: 30px; 
+    
+  }
+  
+  .navbar{
+      width:75% !important;
+      margin:4px auto;
+      left:0;
+      right:0;
+      padding:0;
+      border-radius: 30px; 
+  }
+  
+  .jumbotron
+  {
+    color: whitesmoke;
+    background-image: url("https://d33wubrfki0l68.cloudfront.net/590398ae9a27fec27fdac9450c0738d409cc84ff/c6bb7/static/2b5773beca118974180168ada813ba7b/an-introduction-to-low-level-programming.jpg");
+    background-attachment: fixed;
+    background-repeat: two;
+  
+    background-size: contain;
+
+  }
+  .card:hover{
+    -webkit-transform: translate(0, -8px);
+    -moz-transform: translate(0, -8px);
+    -ms-transform: translate(0, -8px);
+    -o-transform: translate(0, -8px);
+    transform: translate(0, -8px);
+    box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+  }
