@@ -1,3 +1,2 @@
-This website is my first javascript project. 
-
-live :https://programming-contest-dipak.netlify.app/#home
+This website is my first javascript project.
+HTML,CSS AND JS   is used 
