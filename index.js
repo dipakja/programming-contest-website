@@ -42,34 +42,39 @@ let imgUrls = [
         return imgUrls[Math.floor(Math.random() * imgUrls.length)];
     };
 
-    let url = "https://kontests.net/api/v1/all";
+   document.addEventListener('DOMContentLoaded', function () {
+    const cardContainer = document.getElementById('cardContainer');
+
+    const url = "https://kontests.net/api/v1/all";
     fetch(url)
         .then(response => response.json())
         .then(contests => {
             let ihtml = "";
-            let bgimg = randomImg();
-            let c = 0;
 
             for (const item in contests) {
-                if (c === 5) {
-                    c = 0;
-                    bgimg = randomImg();
-                }
-                c++;
+                const contest = contests[item];
 
-                ihtml += `
-                    <div id="contests" class="card mx-2 my-2" style="width: 22rem;">
-                        <img src=${bgimg} alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">${contests[item].name}</h5>
-                            <p>Starts at: ${contests[item].start_time}</p>
-                            <p>Ends at: ${contests[item].end_time}</p>
-                            <a href="${contests[item].url}" class="btn btn-outline-success my-4">Visit Contest</a>
-                        </div>
-                    </div>`;
+                // Check if the contest is currently ongoing
+                const currentTime = new Date().getTime();
+                const startTime = new Date(contest.start_time).getTime();
+                const endTime = new Date(contest.end_time).getTime();
+
+                if (currentTime >= startTime && currentTime <= endTime) {
+                    ihtml += `
+                        <div id="contests" class="card mx-2 my-2" style="width: 22rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">${contest.name}</h5>
+                                <p class="card-text">${contest.description}</p>
+                                <p>Starts at: ${contest.start_time}</p>
+                                <p>Ends at: ${contest.end_time}</p>
+                                <a href="${contest.url}" class="btn btn-outline-success my-4" target="_blank">View Contest</a>
+                            </div>
+                        </div>`;
+                }
             }
 
             cardContainer.innerHTML = ihtml;
         })
         .catch(error => console.error('Error fetching contests:', error));
 });
+
