@@ -39,41 +39,40 @@ let imgUrls = [
   // console.log(rand)
   
   const randomImg = () => {
-    return imgUrls[ Math.floor(Math.random() *imgUrls.length)]
-  }
-  console.log(randomImg)
-  
-  let url = "https://kontests.net/api/v1/all"
-  let response = fetch(url)
-  response.then((v) => {
-          return v.json()
-  }).then((contests) => {
-          // console.log(contests)
-        let  ihtml = "";
+    return imgUrls[Math.floor(Math.random() * imgUrls.length)];
+};
+
+let url = 'https://jsonplaceholder.typicode.com/users'; // Example API endpoint
+let response = fetch(url);
+
+response.then((v) => {
+    return v.json();
+}).then((users) => {
+    let ihtml = '';
     let bgimg = randomImg();
     let c = 0;
-    for (item in contests) {
-      if (c == 5) {
-        c = 0;
-        bgimg = randomImg();
-      }
-      c++;
-          
-                  ihtml += `
-                 
-                  <div  id="contests" class="card mx-2 my-2" style="width: 22rem;">
-                                  <img src=${bgimg} alt="">
-                  
-                                  <div class="card-body">
-                                         
-                                        
-                                  <h5 class="card-title">${contests[item].name}</h5>
-                                          <p>Starts at: ${contests[item].start_time}
-                                          <p>Ends at: ${contests[item].end_time}
-                                          <a href="${contests[item].url}" class="btn btn-outline-success my-4">Visit Contest</a>
-                                  </div>
-                          </div>
-                  `
-          }
-          cardContainer.innerHTML = ihtml
-  })
+
+    for (const user of users) {
+        if (c == 5) {
+            c = 0;
+            bgimg = randomImg();
+        }
+        c++;
+
+        ihtml += `
+            <div id="contests" class="card mx-2 my-2" style="width: 22rem;">
+                <img src=${bgimg} alt="">
+                <div class="card-body">
+                    <h5 class="card-title">${user.name}</h5>
+                    <p>Email: ${user.email}</p>
+                    <p>Username: ${user.username}</p>
+                    <a href="https://jsonplaceholder.typicode.com/users/${user.id}" class="btn btn-outline-success my-4">Visit User</a>
+                </div>
+            </div>
+        `;
+    }
+
+    cardContainer.innerHTML = ihtml;
+}).catch((error) => {
+    console.error('Error fetching data:', error);
+});
